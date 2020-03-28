@@ -7,8 +7,10 @@ defmodule Servy.Handler do
   end
 
   def parse(request) do
-    request_line = String.split(request, "\n") |> List.first
-    [method, path, _version] = String.split(request_line, " ")
+    [method, path, _version] = request
+      |> String.split("\n")
+      |> List.first
+      |> String.split(" ")
 
     %{ method: method, path: path, resp_body: ""}
   end

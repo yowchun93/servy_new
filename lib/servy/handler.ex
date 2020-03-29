@@ -10,16 +10,16 @@ defmodule Servy.Handler do
     Servy.Parser.parse(request)
   end
 
-  def log(conv) do
-    IO.inspect conv
-  end
-
   def route(conv = %{ path: "/wildthings" }) do
     %{ conv | resp_body: "Bears, Lions, Tigers", status: 200 }
   end
 
   def route(conv = %{ path: "/bears" }) do
     %{ conv | resp_body: "Bears", status: 200 }
+  end
+
+  def route(conv = %{ path: "/bears/" <> id }) do
+    %{ conv | resp_body: "Bear #{id}", status: 200}
   end
 
   def route(conv = %{ path: path } ) do

@@ -66,4 +66,24 @@ defmodule HandlerTest do
     assert response == expected_response
   end
 
+  test "handling single GET request" do
+    response_body = "Bear 1"
+    request = """
+    GET /bears/1 HTTP/1.1
+    Host: example.com
+    User-Agent: ExampleBrowser/1.0
+    Accept: */*
+
+    """
+
+    expected_response = """
+    HTTP/1.1 200 OK
+    Content-Type: text/html
+    Content-Length: #{response_body |> String.length}
+
+    #{response_body}
+    """
+    assert Handler.handle(request) == expected_response
+  end
+
 end

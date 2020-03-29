@@ -5,6 +5,6 @@ defmodule Servy.Parser do
       |> List.first
       |> String.split(" ")
 
-    %{ method: method, path: path, resp_body: ""}
+    %{ method: method, path: path, resp_body: "", status: "" }
   end
 end

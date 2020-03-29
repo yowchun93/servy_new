@@ -45,4 +45,25 @@ defmodule HandlerTest do
     assert response == expected_response
   end
 
+  test "unknown path" do
+    path = "onepiece"
+    request = """
+    GET /#{path} HTTP/1.1
+    Host: example.com
+    User-Agent: ExampleBrowser/1.0
+    Accept: */*
+
+    """
+
+    expected_response = """
+    HTTP/1.1 200 OK
+    Content-Type: text/html
+    Content-Length: 17
+
+    No /#{path} here
+    """
+    response = Handler.handle(request)
+    assert response == expected_response
+  end
+
 end

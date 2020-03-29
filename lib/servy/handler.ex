@@ -14,12 +14,16 @@ defmodule Servy.Handler do
     IO.inspect conv
   end
 
-  def route(conv) do
-    if conv.path == "/wildthings" do
-      %{ conv | resp_body: "Bears, Lions, Tigers"}
-    else
-      %{ conv | resp_body: "Bears"}
-    end
+  def route(conv = %{ path: "/wildthings" }) do
+    %{ conv | resp_body: "Bears, Lions, Tigers"}
+  end
+
+  def route(conv = %{ path: "/bears" }) do
+    %{ conv | resp_body: "Bears"}
+  end
+
+  def route(conv = %{ path: path } ) do
+    %{ conv | resp_body: "No #{path} here"}
   end
 
   def format_response(conv) do

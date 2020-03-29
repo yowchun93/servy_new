@@ -10,8 +10,16 @@ defmodule Servy.Handler do
     Servy.Parser.parse(request)
   end
 
+  def log(conv) do
+    IO.inspect conv
+  end
+
   def route(conv) do
-    %{ conv | resp_body: "Bears, Lions, Tigers"}
+    if conv.path == "/wildthings" do
+      %{ conv | resp_body: "Bears, Lions, Tigers"}
+    else
+      %{ conv | resp_body: "Bears"}
+    end
   end
 
   def format_response(conv) do

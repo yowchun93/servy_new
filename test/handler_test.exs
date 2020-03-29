@@ -23,4 +23,26 @@ defmodule HandlerTest do
     response = Handler.handle(request)
     assert response == expected_response
   end
+
+  test "handle bears request" do
+    request = """
+    GET /bears HTTP/1.1
+    Host: example.com
+    User-Agent: ExampleBrowser/1.0
+    Accept: */*
+
+    """
+
+    expected_response = """
+    HTTP/1.1 200 OK
+    Content-Type: text/html
+    Content-Length: 5
+
+    Bears
+    """
+
+    response = Handler.handle(request)
+    assert response == expected_response
+  end
+
 end
